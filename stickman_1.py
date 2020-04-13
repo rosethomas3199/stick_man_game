@@ -1,4 +1,5 @@
 ##change
+## Changes made by thomas
 from tkinter import *
 import random
 import time
