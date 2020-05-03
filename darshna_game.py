@@ -2,22 +2,23 @@ from tkinter import *
 import random
 import time
 
+
 class Game:
     def __init__(self):
         self.tk = Tk()
         self.tk.title("Mr. Stick Man Races for the Exit")
         self.tk.resizable(0, 0)
         self.tk.wm_attributes("-topmost", 1)
-        self.canvas = Canvas(self.tk, width=800, height=800,highlightthickness=0)
+        self.canvas = Canvas(self.tk, width=600, height=600,highlightthickness=0)
         self.canvas.pack()
         self.tk.update()
-        self.canvas_height = 500
-        self.canvas_width = 500
+        self.canvas_height = 600
+        self.canvas_width = 600
         self.bg = PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\pink_background.gif")
         w = self.bg.width()
         h = self.bg.height()
-        for x in range(0, 5):
-            for y in range(0, 5):
+        for x in range(0,6):
+            for y in range(0, 6):
                 self.canvas.create_image(x * w, y * h, image=self.bg, anchor='nw')
         self.sprites = []
         self.running = True
@@ -27,11 +28,35 @@ class Game:
                 for sprite in self.sprites:
                     sprite.move()
             else:
-                time.sleep(1)
-                message=canvas.create_text(250,150,text='YOU WIN!',font=('Courier',22))
+                time.sleep(0.05)
+                letter=PhotoImage(file="letter.gif")
+                bck=PhotoImage(file="black.gif")
+                crush1=PhotoImage(file="crush1.gif")
+                crush2 = PhotoImage(file="crush2.gif")
+                ball = PhotoImage(file="ball.gif")
+                a=self.canvas.create_image(100,100,image=letter,anchor='nw')
+                self.tk.update_idletasks()
+                time.sleep(2)
+                self.canvas.itemconfig(a, state='hidden')
+                b=self.canvas.create_image(0,0,image=bck,anchor='nw')
+                c=self.canvas.create_image(100,100,image=crush1,anchor='nw')
+                self.tk.update_idletasks()
+                time.sleep(0.20)
+                self.canvas.itemconfig(c, state='hidden')
+                d=self.canvas.create_image(150,150,image=crush2,anchor='nw')
+                self.tk.update_idletasks()
+                time.sleep(0.20)
+                self.canvas.itemconfig(d, state='hidden')
+                e=self.canvas.create_image(200,200,image=ball,anchor='nw')
+                self.tk.update_idletasks()
+                time.sleep(0.20)
+                self.canvas.itemconfig(e, state='hidden')
+                self.tk.update_idletasks()
+                time.sleep(180)
             self.tk.update_idletasks()
             self.tk.update()
             time.sleep(0.01)
+            
 class Coords:
     def __init__(self, x1=0, y1=0, x2=0, y2=0):
         self.x1 = x1
@@ -104,7 +129,7 @@ class StickFigureSprite(Sprite):
         Sprite.__init__(self, game)
         self.images_left = [PhotoImage(file="runman_b1.gif"),PhotoImage(file="runman_b2.gif"),PhotoImage(file="runman_b3.gif")]
         self.images_right = [PhotoImage(file="runman_f1.gif"),PhotoImage(file="runman_f2.gif"),PhotoImage(file="runman_f3.gif")]
-        self.image = game.canvas.create_image(200, 470,image=self.images_left[0], anchor='nw')
+        self.image = game.canvas.create_image(600, 570,image=self.images_left[0], anchor='nw')
         self.x = -2
         self.y = 0
         self.current_image = 0
@@ -222,26 +247,31 @@ class DoorSprite(Sprite):
         self.coordinates = Coords(x, y, x + (width / 2), y + height)
         self.endgame = True
     def opendoor(self):
-        self.gamee.canvas.itemconfig(self.image, image=self.open_door)
+        self.game.canvas.itemconfig(self.image, image=self.open_door)
         self.game.tk.update_idletasks()
     def closedoor(self):
-        self.game.canvas.itemconfig(self.image,
-        image=self.closed_door)
+        self.game.canvas.itemconfig(self.image,image=self.closed_door)
         self.game.tk.update_idletasks()
-
-
+    
 
 g=Game()
-platform1 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar1.gif"), 0, 480, 100, 10)
-platform2 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar1.gif"),150, 440, 100, 10)
-platform3 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar1.gif"),300, 400, 100, 10)
-platform4 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar1.gif"),300, 160, 100, 10)
-platform5 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),175, 350, 66, 10)
-platform6 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),50, 300, 66, 10)
-platform7 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),170, 120, 66, 10)
-platform8 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),45, 60, 66, 10)
-platform9 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),170, 250, 32, 10)
-platform10 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),230, 200, 32, 10) 
+platform1 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar1.gif"), 0, 580, 100, 10)
+platform2 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),147, 540, 66, 10)
+platform3 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),247, 500, 66, 10)
+platform4 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),165, 450, 66, 10)
+platform5 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\lvl2.gif"),47, 400, 100, 10)
+platform6 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),170, 350, 32, 10)
+platform7 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),215, 350, 66, 10)
+platform8 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),290, 300, 32, 10)
+platform9 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),335, 270, 32, 10)
+platform10 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),375, 240, 32, 10)
+platform11 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\lvl3.gif"),415, 210, 100, 10)
+platform12 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),330, 180, 66, 10)
+platform13= PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar3.gif"),285, 155, 32, 10)
+platform14 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\lvl4.gif"),170,130, 100, 10)
+platform15 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),95, 100, 32, 10)
+platform16 = PlatformSprite(g, PhotoImage(file="C:\\Users\\ROSE THOMAS\\Desktop\\python_class\\stickman\\bar2.gif"),20, 60, 66, 10)
+
 g.sprites.append(platform1)
 g.sprites.append(platform2)
 g.sprites.append(platform3)
@@ -252,8 +282,19 @@ g.sprites.append(platform7)
 g.sprites.append(platform8)
 g.sprites.append(platform9)
 g.sprites.append(platform10)
-door = DoorSprite(g, 45, 30, 40, 35)
+g.sprites.append(platform11)
+g.sprites.append(platform12)
+g.sprites.append(platform13)
+g.sprites.append(platform14)
+g.sprites.append(platform15)
+g.sprites.append(platform16)
+door =DoorSprite(g,55,370,40,35)
+door1=DoorSprite(g,180,100,40,35)
+door2=DoorSprite(g,420,180,40,35)
 g.sprites.append(door)
 sf = StickFigureSprite(g)
 g.sprites.append(sf)
 g.mainloop()
+
+
+
